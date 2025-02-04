@@ -15,7 +15,7 @@ class ToDo:
         self.main_page()
 
     def db_execute(self,query,params = []):
-        with sqlite3.connect('database.db') as con:
+        with sqlite3.connect('database.sqlite') as con:
             cur = con.cursor()
             cur.execute(query, params)
             con.commit()
@@ -29,9 +29,9 @@ class ToDo:
         status = 'incomplete'
 
         if name:
-            self.db_execute(query='INSERT INTO tasks VALUE(?,?)', params=(name, status))
+            self.db_execute(query='INSERT INTO tasks VALUES(?,?)', params=(name, status))
             input_task.value = ''
-            
+
 
     def tasks_container(self):
         return ft.Container(
